@@ -1,53 +1,86 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 /**
- * Floating geometric shapes as background decoration
+ * Floating geometric shapes as background decoration — more depth layers
  */
-export const FloatingShapes = () => (
-  <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 1 }}>
-    {/* Rotating ring - top left */}
-    <motion.div
-      className="absolute top-[15vh] left-[5vw] w-32 h-32 border border-brand-blue-soft/20 rounded-full animate-spin-slow"
-      aria-hidden
-    />
+export const FloatingShapes = () => {
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 5000], [0, -400]);
+  const y2 = useTransform(scrollY, [0, 5000], [0, -200]);
+  const y3 = useTransform(scrollY, [0, 5000], [0, -600]);
 
-    {/* Small filled circle */}
-    <motion.div
-      className="absolute top-[45vh] right-[8vw] w-4 h-4 bg-brand-coral/20 rounded-full animate-float"
-      aria-hidden
-    />
+  return (
+    <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 1 }}>
+      {/* Rotating ring with parallax */}
+      <motion.div
+        style={{ y: y1 }}
+        className="absolute top-[15vh] left-[5vw] w-40 h-40 border border-brand-blue-soft/[0.08] rounded-full animate-spin-slow"
+        aria-hidden
+      />
+      <motion.div
+        style={{ y: y1 }}
+        className="absolute top-[15vh] left-[5vw] w-28 h-28 border border-brand-sage/[0.06] rounded-full animate-spin-slower"
+        aria-hidden
+      />
 
-    {/* Rotating ring - mid right */}
-    <motion.div
-      className="absolute top-[70vh] right-[15vw] w-20 h-20 border border-brand-sage/15 rounded-full animate-spin-slower"
-      aria-hidden
-    />
+      {/* Coral accent dot cluster */}
+      <motion.div style={{ y: y2 }} className="absolute top-[40vh] right-[6vw]" aria-hidden>
+        <div className="w-3 h-3 bg-brand-coral/15 rounded-full animate-float" />
+        <div className="w-2 h-2 bg-brand-coral/10 rounded-full animate-float-slow ml-4 -mt-1" />
+        <div className="w-1.5 h-1.5 bg-brand-coral-soft/15 rounded-full animate-float-slower ml-1 mt-2" />
+      </motion.div>
 
-    {/* Diamond shape */}
-    <motion.div
-      className="absolute top-[55vh] left-[12vw] w-6 h-6 bg-brand-blue-warm/10 rotate-45 animate-float-slow"
-      aria-hidden
-    />
+      {/* Mid-right rings */}
+      <motion.div
+        style={{ y: y3 }}
+        className="absolute top-[75vh] right-[12vw] w-24 h-24 border border-brand-sage/[0.07] rounded-full animate-spin-slower"
+        aria-hidden
+      />
 
-    {/* Large subtle ring */}
-    <motion.div
-      className="absolute top-[130vh] left-[50vw] w-48 h-48 border border-brand-mint/10 rounded-full animate-spin-slower"
-      aria-hidden
-    />
+      {/* Diamond shapes */}
+      <motion.div style={{ y: y2 }} className="absolute top-[55vh] left-[10vw]" aria-hidden>
+        <div className="w-5 h-5 bg-brand-blue-warm/[0.06] rotate-45 animate-float-slow" />
+      </motion.div>
+      <motion.div style={{ y: y1 }} className="absolute top-[85vh] right-[25vw]" aria-hidden>
+        <div className="w-4 h-4 bg-brand-forest/[0.05] rotate-45 animate-float" />
+      </motion.div>
 
-    {/* Small coral dot */}
-    <motion.div
-      className="absolute top-[90vh] left-[80vw] w-3 h-3 bg-brand-coral-soft/25 rounded-full animate-pulse-soft"
-      aria-hidden
-    />
+      {/* Large subtle ring cluster at page mid */}
+      <motion.div
+        style={{ y: y3 }}
+        className="absolute top-[130vh] left-[45vw]"
+        aria-hidden
+      >
+        <div className="w-56 h-56 border border-brand-mint/[0.05] rounded-full animate-spin-slower" />
+        <div className="absolute inset-4 border border-brand-blue-soft/[0.04] rounded-full animate-spin-slow" />
+      </motion.div>
 
-    {/* Blue dot */}
-    <motion.div
-      className="absolute top-[200vh] left-[20vw] w-5 h-5 bg-brand-sky/15 rounded-full animate-float-slower"
-      aria-hidden
-    />
-  </div>
-);
+      {/* Blue dot cluster */}
+      <motion.div style={{ y: y2 }} className="absolute top-[100vh] left-[80vw]" aria-hidden>
+        <div className="w-3 h-3 bg-brand-sky/[0.12] rounded-full animate-pulse-soft" />
+        <div className="w-2 h-2 bg-brand-blue-warm/[0.08] rounded-full animate-pulse-soft ml-3 mt-2 [animation-delay:1s]" />
+      </motion.div>
+
+      {/* Cross shape */}
+      <motion.div style={{ y: y1 }} className="absolute top-[160vh] left-[15vw] opacity-[0.04]" aria-hidden>
+        <div className="w-8 h-[2px] bg-brand-navy absolute top-1/2 -translate-y-1/2" />
+        <div className="h-8 w-[2px] bg-brand-navy absolute left-1/2 -translate-x-1/2" />
+      </motion.div>
+
+      {/* Sage dot */}
+      <motion.div
+        style={{ y: y3 }}
+        className="absolute top-[200vh] left-[20vw] w-5 h-5 bg-brand-sage/[0.1] rounded-full animate-float-slower"
+        aria-hidden
+      />
+
+      {/* Bottom area rings */}
+      <motion.div style={{ y: y2 }} className="absolute top-[250vh] right-[10vw]" aria-hidden>
+        <div className="w-20 h-20 border border-brand-coral/[0.06] rounded-full animate-spin-slow" />
+      </motion.div>
+    </div>
+  );
+};
 
 /**
  * Animated line divider that draws on scroll
@@ -92,3 +125,24 @@ export const GlowOrb = ({
     />
   );
 };
+
+/**
+ * Parallax image wrapper with reveal animation
+ */
+export const ParallaxReveal = ({
+  children,
+  className = '',
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <motion.div
+    initial={{ opacity: 0, y: 60, scale: 0.95 }}
+    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+    viewport={{ once: true, margin: '-100px' }}
+    transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+    className={className}
+  >
+    {children}
+  </motion.div>
+);

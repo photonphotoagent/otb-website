@@ -11,13 +11,12 @@ const AIAdvisor = () => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
-
-  const scrollToBottom = () => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    scrollToBottom();
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
   }, [messages]);
 
   const handleSend = async () => {
@@ -90,7 +89,7 @@ const AIAdvisor = () => {
           </div>
 
           {/* Chat */}
-          <div className="flex-1 overflow-y-auto p-6 md:p-12 space-y-8 md:space-y-12 bg-brand-cream/20">
+          <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-6 md:p-12 space-y-8 md:space-y-12 bg-brand-cream/20">
             <AnimatePresence initial={false}>
               {messages.map((msg, idx) => (
                 <motion.div

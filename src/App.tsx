@@ -16,6 +16,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const timer = setTimeout(() => setIsLoading(false), 2500);
     return () => clearTimeout(timer);
   }, []);
@@ -57,25 +58,25 @@ const App = () => {
               <Hero />
             </section>
 
-            <SectionTransition from="#faf7f2" to="#f0ebe2" />
+            <SectionTransition from="#faf7f2" to="#f0ebe2" accent="blue" />
 
             <section id="philosophy" className="py-32 lg:py-40 bg-brand-cream-deep/40">
               <Philosophy />
             </section>
 
-            <SectionTransition from="#f0ebe2" to="#faf7f2" flip />
+            <SectionTransition from="#f0ebe2" to="#faf7f2" flip accent="green" />
 
             <section id="strategy" className="py-32 lg:py-40">
               <AIAdvisor />
             </section>
 
-            <SectionTransition from="#faf7f2" to="#f0ebe2" />
+            <SectionTransition from="#faf7f2" to="#f0ebe2" accent="coral" />
 
             <section id="scenarios" className="py-32 lg:py-40 bg-brand-cream-deep/40">
               <ScenariosSection />
             </section>
 
-            <SectionTransition from="#f0ebe2" to="#faf7f2" flip />
+            <SectionTransition from="#f0ebe2" to="#faf7f2" flip accent="blue" />
 
             <section id="contact" className="py-32 lg:py-40">
               <ContactSection />

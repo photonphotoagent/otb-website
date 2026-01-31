@@ -4,7 +4,7 @@ import { getGeminiAdvisor } from '../services/gemini';
 import { ChatMessage } from '../types';
 import AnimatedText from './AnimatedText';
 
-const AIAdvisor = () => {
+const WinWinFinder = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([
     { role: 'model', text: "Welcome to your personal strategy session. I'm here to help you explore creative, ethical real estate solutions. Tell me about your situation\u2014equity concerns, timeline pressures, or property challenges\u2014and together we'll find a path forward." }
   ]);
@@ -42,9 +42,9 @@ const AIAdvisor = () => {
         whileInView={{ opacity: 1 }}
         className="text-center mb-20"
       >
-        <span className="text-brand-blue-warm font-black uppercase tracking-[0.4em] text-[10px] mb-4 block font-label">Your Personal Advisor</span>
+        <span className="text-brand-blue-warm font-black uppercase tracking-[0.4em] text-[10px] mb-4 block font-label">Your Strategy Partner</span>
         <AnimatedText
-          text="AI-Powered Strategy Session"
+          text="The Win-Win Finder"
           as="h2"
           className="text-5xl md:text-6xl font-medium text-warm-dark mb-6 tracking-tight font-display"
         />
@@ -160,4 +160,4 @@ const AIAdvisor = () => {
   );
 };
 
-export default AIAdvisor;
+export default WinWinFinder;

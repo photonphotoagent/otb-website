@@ -5,7 +5,7 @@ export const getGeminiAdvisor = async (history: ChatMessage[]) => {
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY || "";
 
   if (!apiKey) {
-    return "The AI consultation engine is currently being configured. Please reach out to us directly at concierge@otb.capital for immediate assistance.";
+    return "The Win-Win Finder is currently being configured. Please reach out to us directly at concierge@otb.capital for immediate assistance.";
   }
 
   const ai = new GoogleGenAI({ apiKey });

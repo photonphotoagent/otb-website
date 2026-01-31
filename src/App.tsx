@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Philosophy from './components/Philosophy';
-import AIAdvisor from './components/AIAdvisor';
+import WinWinFinder from './components/WinWinFinder';
 import ScenariosSection from './components/ScenariosSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
@@ -67,7 +67,7 @@ const App = () => {
             <SectionTransition from="#f0ebe2" to="#faf7f2" flip accent="green" />
 
             <section id="strategy" className="py-32 lg:py-40">
-              <AIAdvisor />
+              <WinWinFinder />
             </section>
 
             <SectionTransition from="#faf7f2" to="#f0ebe2" accent="coral" />

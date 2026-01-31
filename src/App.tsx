@@ -6,9 +6,19 @@ import AIAdvisor from './components/AIAdvisor';
 import ScenariosSection from './components/ScenariosSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
+import LoadingScreen from './components/LoadingScreen';
+import BackgroundOrbs from './components/BackgroundOrbs';
+import { FloatingShapes } from './components/DecorativeElements';
+import SectionTransition from './components/SectionTransition';
 
 const App = () => {
   const [activeSection, setActiveSection] = useState('home');
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 2500);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,33 +40,52 @@ const App = () => {
   }, []);
 
   return (
-    <div className="min-h-screen selection:bg-stone-200 selection:text-stone-800">
-      <Navbar activeSection={activeSection} />
+    <>
+      <LoadingScreen isLoading={isLoading} />
 
-      <main>
-        <section id="home">
-          <Hero />
-        </section>
+      <div className="min-h-screen selection:bg-brand-blue-soft selection:text-brand-navy">
+        {/* Background layers */}
+        <BackgroundOrbs />
+        <FloatingShapes />
 
-        <section id="philosophy" className="py-24 bg-stone-50">
-          <Philosophy />
-        </section>
+        {/* Content */}
+        <div className="relative" style={{ zIndex: 2 }}>
+          <Navbar activeSection={activeSection} />
 
-        <section id="strategy" className="py-24">
-          <AIAdvisor />
-        </section>
+          <main>
+            <section id="home">
+              <Hero />
+            </section>
 
-        <section id="scenarios" className="py-24 bg-stone-50">
-          <ScenariosSection />
-        </section>
+            <SectionTransition from="#faf7f2" to="#f0ebe2" />
 
-        <section id="contact" className="py-24">
-          <ContactSection />
-        </section>
-      </main>
+            <section id="philosophy" className="py-32 lg:py-40 bg-brand-cream-deep/40">
+              <Philosophy />
+            </section>
 
-      <Footer />
-    </div>
+            <SectionTransition from="#f0ebe2" to="#faf7f2" flip />
+
+            <section id="strategy" className="py-32 lg:py-40">
+              <AIAdvisor />
+            </section>
+
+            <SectionTransition from="#faf7f2" to="#f0ebe2" />
+
+            <section id="scenarios" className="py-32 lg:py-40 bg-brand-cream-deep/40">
+              <ScenariosSection />
+            </section>
+
+            <SectionTransition from="#f0ebe2" to="#faf7f2" flip />
+
+            <section id="contact" className="py-32 lg:py-40">
+              <ContactSection />
+            </section>
+          </main>
+
+          <Footer />
+        </div>
+      </div>
+    </>
   );
 };
 
